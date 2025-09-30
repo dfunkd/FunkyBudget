@@ -1,0 +1,146 @@
+﻿<UserControl x:Class="FunkyBudget.UserControls.BudgetCalendar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:FunkyBudget.ViewModels"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:FunkyBudget.UserControls"
+             mc:Ignorable="d"
+             Loaded="OnLoad">
+
+    <UserControl.CommandBindings>
+        <CommandBinding Command="{x:Static local:BudgetCalendar.AddLineItemCommand}" CanExecute="CanExecuteAddLineItemCommand" Executed="ExecutedAddLineItemCommand" />
+        <CommandBinding Command="{x:Static local:BudgetCalendar.NextMonthCommand}" CanExecute="CanExecuteNextMonthCommand" Executed="ExecutedNextMonthCommand" />
+        <CommandBinding Command="{x:Static local:BudgetCalendar.PreviousMonthCommand}" CanExecute="CanExecutePreviousMonthCommand" Executed="ExecutedPreviousMonthCommand" />
+    </UserControl.CommandBindings>
+
+    <UserControl.DataContext>
+        <vm:BudgetCalendarViewModel />
+    </UserControl.DataContext>
+
+    <DockPanel Grid.Row="1" Margin="15" LastChildFill="True">
+        <Grid DockPanel.Dock="Top" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!--Month Selection-->
+            <DockPanel Grid.Column="1" LastChildFill="False" HorizontalAlignment="Center">
+                <Button x:Name="btnPreviousMonth" DockPanel.Dock="Left" Background="{DynamicResource Lighter}" Command="local:BudgetCalendar.PreviousMonthCommand" Height="35"
+                        Margin="0, 3" Padding="5" Style="{DynamicResource faButtonStyle}" VerticalAlignment="Center" Width="35">
+                    <Button.Content>
+                        <fa:ImageAwesome Foreground="{DynamicResource Lightest}" Icon="ArrowLeft" Stretch="Uniform"/>
+                    </Button.Content>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="8, 0, 0, 8" />
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <TextBlock x:Name="txtSelectedMonth" DockPanel.Dock="Left" Background="{DynamicResource Lighter}" FontSize="19" FontWeight="Bold"
+                           Foreground="{DynamicResource Lightest}" HorizontalAlignment="Center" Margin="0, 3" Padding="5" Text="{Binding MonthString}" TextAlignment="Center"
+                           VerticalAlignment="Center" Width="200" />
+                <Button x:Name="btnNextMonth" DockPanel.Dock="Left" Background="{DynamicResource Lighter}" Command="local:BudgetCalendar.NextMonthCommand" Height="35"
+                        Margin="0, 3" Padding="5" Style="{DynamicResource faButtonStyle}" VerticalAlignment="Center" Width="35">
+                    <Button.Content>
+                        <fa:ImageAwesome Foreground="{DynamicResource Lightest}" Icon="ArrowRight" Stretch="Uniform"/>
+                    </Button.Content>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="0, 8, 8, 0" />
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </DockPanel>
+
+            <!--Add Line Item-->
+            <Button x:Name="btnAddLineItem" Grid.Column="2" Command="local:BudgetCalendar.AddLineItemCommand" Height="25" HorizontalAlignment="Right" Padding="5"
+                    Style="{DynamicResource faButtonStyle}" ToolTip="Add New Line Item" VerticalAlignment="Center" Width="25">
+                <Button.Content>
+                    <fa:ImageAwesome Foreground="{DynamicResource Lightest}" Icon="Plus" Stretch="Uniform"/>
+                </Button.Content>
+            </Button>
+        </Grid>
+
+        <!--Calendar-->
+        <DockPanel DockPanel.Dock="Top" LastChildFill="False">
+            <Grid DockPanel.Dock="Top" Background="{DynamicResource Darker}" Margin="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!--Day of Week Row-->
+                <Border Grid.Column="0" Grid.Row="1" BorderBrush="{DynamicResource Lighter}" BorderThickness="1" HorizontalAlignment="Stretch">
+                    <TextBlock FontSize="19" FontWeight="Bold" Foreground="{DynamicResource Lightest}" HorizontalAlignment="Stretch" Padding="5" Text="Sunday"
+                               TextAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+                <Border Grid.Column="1" Grid.Row="1" BorderBrush="{DynamicResource Lighter}" BorderThickness="1" HorizontalAlignment="Stretch">
+                    <TextBlock FontSize="19" FontWeight="Bold" Foreground="{DynamicResource Lightest}" HorizontalAlignment="Stretch" Padding="5" Text="Monday"
+                               TextAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+                <Border Grid.Column="2" Grid.Row="1" BorderBrush="{DynamicResource Lighter}" BorderThickness="1" HorizontalAlignment="Stretch">
+                    <TextBlock FontSize="19" FontWeight="Bold" Foreground="{DynamicResource Lightest}" HorizontalAlignment="Stretch" Padding="5" Text="Tuesday"
+                               TextAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+                <Border Grid.Column="3" Grid.Row="1" BorderBrush="{DynamicResource Lighter}" BorderThickness="1" HorizontalAlignment="Stretch">
+                    <TextBlock FontSize="19" FontWeight="Bold" Foreground="{DynamicResource Lightest}" HorizontalAlignment="Stretch" Padding="5" Text="Wednesday"
+                               TextAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+                <Border Grid.Column="4" Grid.Row="1" BorderBrush="{DynamicResource Lighter}" BorderThickness="1" HorizontalAlignment="Stretch">
+                    <TextBlock FontSize="19" FontWeight="Bold" Foreground="{DynamicResource Lightest}" HorizontalAlignment="Stretch" Padding="5" Text="Thursday"
+                               TextAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+                <Border Grid.Column="5" Grid.Row="1" BorderBrush="{DynamicResource Lighter}" BorderThickness="1" HorizontalAlignment="Stretch">
+                    <TextBlock FontSize="19" FontWeight="Bold" Foreground="{DynamicResource Lightest}" HorizontalAlignment="Stretch" Padding="5" Text="Friday"
+                               TextAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+                <Border Grid.Column="6" Grid.Row="1" BorderBrush="{DynamicResource Lighter}" BorderThickness="1" HorizontalAlignment="Stretch">
+                    <TextBlock FontSize="19" FontWeight="Bold" Foreground="{DynamicResource Lightest}" HorizontalAlignment="Stretch" Padding="5" Text="Saturday"
+                               TextAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+            </Grid>
+            <Grid x:Name="grdCalendar" DockPanel.Dock="Top" Margin="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+            </Grid>
+        </DockPanel>
+
+        <!--Totals-->
+        <Border DockPanel.Dock="Top" Background="{DynamicResource Darker}" BorderBrush="{DynamicResource Darker}" BorderThickness="2" Margin="0, 5, 0, 0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                
+                <TextBlock Grid.Row="0" Background="{DynamicResource Lighter}" FontSize="14" FontWeight="Bold" Foreground="{DynamicResource Lightest}"
+                           HorizontalAlignment="Stretch" Padding="5" Text="Credit Card" TextAlignment="Center" VerticalAlignment="Center" />
+
+                <DockPanel x:Name="dpCreditCard" Grid.Row="1" LastChildFill="False" />
+
+                <TextBlock Grid.Row="2" Background="{DynamicResource Lighter}" FontSize="14" FontWeight="Bold" Foreground="{DynamicResource Lightest}"
+                           HorizontalAlignment="Stretch" Padding="5" Text="Checking" TextAlignment="Center" VerticalAlignment="Center" />
+
+                <DockPanel x:Name="dpChecking" Grid.Row="1" LastChildFill="False" />
+            </Grid>
+        </Border>
+    </DockPanel>
+</UserControl>
