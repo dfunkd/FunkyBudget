@@ -19,7 +19,15 @@ public partial class AddLineItemWindow : Window
     private async void ExecutedAddLineItemCommand(object sender, ExecutedRoutedEventArgs e)
     {
         if (DataContext is AddLineItemViewModel vm)
+        {
+            //bool hasStart = DateTime.TryParse(dtStart.Text, out DateTime start);
+            //vm.StartDate =  hasStart ? start : DateTime.Now;
+
+            //bool hasEnd = DateTime.TryParse(dtEnd.Text, out DateTime end);
+            //vm.EndDate = hasEnd ? end : null;
+
             DialogResult = await vm.AddLineItemAsync(default);
+        }
 
         Close();
     }

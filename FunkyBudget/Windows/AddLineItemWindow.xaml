@@ -84,13 +84,13 @@
                     HorizontalAlignment="Left" Margin="5, 5, 5, 0" Padding="15, 0, 25, 0">
                 <TextBlock FontSize="18" FontWeight="Bold" Foreground="{DynamicResource Lightest}" Text="Start Date" />
             </Border>
-            <xctk:MaskedTextBox Grid.Column="0" Grid.Row="3" Mask="00/00/0000" PromptChar="_" Value="{Binding StartDate, Mode=TwoWay}" />
+            <xctk:DateTimePicker Grid.Column="0" Grid.Row="3" Value="{Binding StartDate, Mode=TwoWay}" />
 
             <Border Grid.Column="1" Grid.Row="2" Background="{DynamicResource Darker}" BorderBrush="{DynamicResource Darkest}" BorderThickness="1" CornerRadius="5, 15, 0, 0"
                     HorizontalAlignment="Left" Margin="5, 5, 5, 0" Padding="15, 0, 25, 0">
                 <TextBlock FontSize="18" FontWeight="Bold" Foreground="{DynamicResource Lightest}" Text="End Date" />
             </Border>
-            <xctk:MaskedTextBox Grid.Column="1" Grid.Row="3" Mask="00/00/0000" PromptChar="_" Value="{Binding EndDate, Mode=TwoWay}" />
+            <xctk:DateTimePicker Grid.Column="1" Grid.Row="3"  Value="{Binding EndDate, Mode=TwoWay}" />
 
             <Border Grid.Column="2" Grid.Row="2" Background="{DynamicResource Darker}" BorderBrush="{DynamicResource Darkest}" BorderThickness="1" CornerRadius="5, 15, 0, 0"
                     HorizontalAlignment="Left" Margin="5, 5, 5, 0" Padding="15, 0, 25, 0"
